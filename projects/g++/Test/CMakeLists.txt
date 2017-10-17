@@ -1,0 +1,35 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(TESTS)
+
+set(MENGE_EXE_DIR ${CMAKE_SOURCE_DIR}/../../Exe) 
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${MENGE_EXE_DIR}/test)
+set(TEST_SOURCE_DIR ${CMAKE_SOURCE_DIR}/../../../src/Test)
+set(PLUGIN_SOURCE_DIR ${CMAKE_SOURCE_DIR}/../../src/Plugins)
+set(MENGE_SOURCE_DIR ${CMAKE_SOURCE_DIR}/../../src/Menge)
+set(3RDPARTY_SOURCE_DIR ${CMAKE_SOURCE_DIR}/../../../src/)
+set(MENGE_LIB_DIR ${CMAKE_BINARY_DIR}/lib )
+
+link_directories( ${MENGE_LIB_DIR}/)
+
+INCLUDE_DIRECTORIES (${MENGE_SOURCE_DIR}/)
+INCLUDE_DIRECTORIES (${MENGE_SOURCE_DIR}/../include)
+INCLUDE_DIRECTORIES (${MENGE_SOURCE_DIR}/../)
+INCLUDE_DIRECTORIES (${TEST_SOURCE_DIR}/../include)
+INCLUDE_DIRECTORIES (${3RDPARTY_SOURCE_DIR}/)
+INCLUDE_DIRECTORIES (${3RDPARTY_SOURCE_DIR}/thirdParty)
+
+set( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fpermissive" )
+
+# Model dlls
+#ADD_SUBDIRECTORY(Sample)
+
+set(CATCH_INCLUDE_DIR ${TEST_SOURCE_DIR}/include/catch)
+add_library(Catch INTERFACE)
+target_include_directories(Catch INTERFACE ${CATCH_INCLUDE_DIR})
+
+set(TEST_SOURCES ${TEST_SOURCE_DIR}/main.cpp)
+add_executable(tests ${TEST_SOURCES})
+target_link_libraries(tests Catch)
+
+set( CMAKE_INSTALL_ALWAYS true )

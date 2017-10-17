@@ -1,6 +1,6 @@
 .PHONY: release debug clean clean-release clean-debug install
 
-DIRS:= build build/release build/debug
+DIRS:= build build/release build/debug build/test
 
 all: $(DIRS) release
 
@@ -40,6 +40,16 @@ clean-release:
 clean-debug:
 	( cd build/debug && $(MAKE) --no-print-directory clean )
 
+test: mkdir-test clean-test run-test
+ 
+mkdir-test:
+	mkdir -p build/test
+
+clean-test:
+	( cd build/test && $(MAKE) --no-print-directory clean )
+
+run-test:
+	( cd build/test && cmake ../../Test && $(MAKE) --no-print-directory && ./tests) 
 
 #release:
 #	( cd build/release && cmake -DCMAKE_BUILD_TYPE=release ../.. && $(MAKE) --no-print-directory && make  --no-print-directory install)

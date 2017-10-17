@@ -378,6 +378,7 @@ int main( int argc, char* argv[] ) {
 	logger.line();
 	std::string pluginPath = getPluginPath();
 	logger << Logger::INFO_MSG << "Plugin path: " << pluginPath;
+  //MAURICIO: carrega plugins coma CorePluginEngine
 	plugins.loadPlugins( pluginPath );
 	if ( simDB.modelCount() == 0 ) {
 		logger << Logger::INFO_MSG << "There were no pedestrian models in the plugins folder\n";
@@ -385,6 +386,7 @@ int main( int argc, char* argv[] ) {
 	}
 
 	ProjectSpec projSpec;
+  //MAURICIO: vou parsear aqui...deveria eu fazer isso?
 	if ( !parseCommandParameters( argc, argv, &projSpec, simDB ) ) {
 		return 0;
 	}
@@ -401,6 +403,7 @@ int main( int argc, char* argv[] ) {
 	Menge::Math::setDefaultGeneratorSeed( projSpec.getRandomSeed() );
 	std::string outFile = projSpec.getOutputName();
 
+  //MAURICIO: aqui faz sentido que a minha view seja externa
 	std::string viewCfgFile = projSpec.getView();
 	bool useVis = viewCfgFile != "";
 	std::string model( projSpec.getModel() );
@@ -412,6 +415,7 @@ int main( int argc, char* argv[] ) {
 		return 1;
 	}
 
+  //MAURICIO: é aqui que a simulação realmente acontece
 	int result = simMain( simDBEntry, projSpec.getBehavior(), projSpec.getScene(),
 						  projSpec.getOutputName(), projSpec.getSCBVersion(), useVis,
 						  viewCfgFile, dumpPath );
