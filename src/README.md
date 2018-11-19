@@ -1,0 +1,1 @@
+all the source code (besides the ones in include) should be here). Bear in mind that with the current structure only mengeMain parts of the application should stay here, because mengeMain actually uses the other libs

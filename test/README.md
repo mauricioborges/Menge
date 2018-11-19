@@ -1,0 +1,1 @@
+the test folder should contain...tests. I believe that unit tests could follow a directory structure similar to the application, but I'd rather check performance issues regarding this before adding too many levels
